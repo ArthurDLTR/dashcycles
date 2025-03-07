@@ -109,6 +109,10 @@ $item = $formSetup->newItem('DASHCYCLES_RELOAD_FREQUENCY');
 $item->defaultFieldValue = '15';
 $item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_RELOAD_FREQUENCY');
 
+// Setuf for number of lines in the widgets
+$item = $formSetup->newItem('DASHCYCLES_MAX_LINES');
+$item->defaultFieldValue = '10';
+$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 // Setup conf for selection of a simple textarea input but we replace the text of field title
 // $item = $formSetup->newItem('DASHCYCLES_MYPARAM3');
 // $item->nameText = $item->getNameText().' more html text ';

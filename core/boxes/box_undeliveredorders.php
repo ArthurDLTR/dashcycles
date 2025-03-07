@@ -32,9 +32,9 @@ include_once DOL_DOCUMENT_ROOT.'/core/boxes/modules_boxes.php';
  */
 class Box_undeliveredorders extends ModeleBoxes
 {
-	public $boxcode  = "lastcustomerorders";
+	public $boxcode  = "undeliveredorders";
 	public $boximg   = "object_order";
-	public $boxlabel = "BoxLastCustomerOrders";
+	public $boxlabel = "BoxUndeliveredOrders";
 	public $depends  = array("commande");
 
 	/**

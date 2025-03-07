@@ -27,6 +27,7 @@
  *  \brief      Description and activation file for module DashCycles
  */
 include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/class/infobox.class.php';
 
 
 /**
@@ -260,8 +261,6 @@ class modDashCycles extends DolibarrModules
 				'note' => 'Widget for undelivered orders, provided by DashCycles',
 				'enabledbydefaulton' => 'Home',
 			 ),
-			 // A modifier, n'affiche pas la bonne quantitée à livrer (grouper par commande ou non dans tous les cas c'est faux)
-			 // Mieux vaut faire une deuxième requete SQL pour récupérer juste la quantité totale pour se simplifier la tâche
 			 2 => array(
 				'file' => 'box_progressshipment@dashcycles',
 				'note' => 'Widget for shipment in progress, provided by DashCycles',
@@ -552,5 +551,173 @@ class modDashCycles extends DolibarrModules
 	{
 		$sql = array();
 		return $this->_remove($sql, $options);
+	}
+
+	/**
+	 * Function called to print the widgets in dashcyclesindex.php
+	 * @return array		Array of the two columns of widgets
+	 */
+	public function getBoxesDashCycles($boxactivated)
+	{
+		global $db;
+		
+		// Original version of the call
+		// $boxactivated = InfoBox::listBoxes($this->db, 'activated', $areacode, (empty($user->conf->$confuserzone) ? null : $user), array(), 0); // Search boxes of common+user (or common only if user has no specific setup)
+		
+		// Define boxlista and boxlistb
+		$boxlista = '';
+		$boxlistb = '';
+		
+		$emptybox = new ModeleBoxes($db);
+ 
+		$boxlista .= "\n<!-- Box left container -->\n";
+	
+		// Define $box_max_lines
+		$box_max_lines = getDolUserInt('DASHCYCLES_MAX_LINES');
+	
+		$ii = 0;
+		foreach ($boxactivated as $key => $box) {
+			// if ((!empty($user->conf->$confuserzone) && $box->fk_user == 0) || (empty($user->conf->$confuserzone) && $box->fk_user != 0)) {
+			// continue;
+			// }
+			if (empty($box->box_order) && $ii < ($nbboxactivated / 2)) {
+			$box->box_order = 'A'.sprintf("%02d", ($ii + 1)); // When box_order was not yet set to Axx or Bxx and is still 0
+			}
+			if (preg_match('/^A/i', $box->box_order)) { // column A
+			$ii++;
+			//print 'box_id '.$boxactivated[$ii]->box_id.' ';
+			//print 'box_order '.$boxactivated[$ii]->box_order.'<br>';
+			// Show box
+			$box->loadBox($box_max_lines);
+			$boxlista .= $box->showBox(null, null, 1);
+			}
+		}
+	
+		// if ($conf->browser->layout != 'phone') {
+		// 	$emptybox->box_id = 'A';
+		// 	$emptybox->info_box_head = array();
+		// 	$emptybox->info_box_contents = array();
+		// 	$boxlista .= $emptybox->showBox(array(), array(), 1);
+		// }
+		$boxlista .= "<!-- End box left container -->\n";
+	
+		$boxlistb .= "\n<!-- Box right container -->\n";
+	
+		$ii = 0;
+		foreach ($boxactivated as $key => $box) {
+			if ((!empty($user->conf->$confuserzone) && $box->fk_user == 0) || (empty($user->conf->$confuserzone) && $box->fk_user != 0)) {
+			continue;
+			}
+			if (empty($box->box_order) && $ii < ($nbboxactivated / 2)) {
+			$box->box_order = 'B'.sprintf("%02d", ($ii + 1)); // When box_order was not yet set to Axx or Bxx and is still 0
+			}
+			if (preg_match('/^B/i', $box->box_order)) { // colonne B
+			$ii++;
+			//print 'box_id '.$boxactivated[$ii]->box_id.' ';
+			//print 'box_order '.$boxactivated[$ii]->box_order.'<br>';
+			// Show box
+			$box->loadBox($box_max_lines);
+			$boxlistb .= $box->showBox(null, null, 1);
+			}
+		}
+	
+		if ($conf->browser->layout != 'phone') {
+			$emptybox->box_id = 'B';
+			$emptybox->info_box_head = array();
+			$emptybox->info_box_contents = array();
+			$boxlistb .= $emptybox->showBox(array(), array(), 1);
+		}
+	
+		$boxlistb .= "<!-- End box right container -->\n";
+	
+		return array('boxlista' => $boxlista, 'boxlistb' => $boxlistb);
+	}
+
+	/**
+	 * Function to return the list of the boxes we want to display on dashcyclesindex.php
+	 * @return array			Array of boxes
+	 */
+	public static function listBoxes()
+	{
+		global $conf, $db;
+
+		$boxes = array();
+
+		$objs = array(
+			(object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "A01",
+				"file" => "/dashcycles/core/boxes/box_undeliveredorders.php",
+				"boxname" => "box_undeliveredorders"
+			),
+			(object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "A02",
+				"file" => "/dashcycles/core/boxes/box_progressshipment.php",
+				"boxname" => "box_progressshipment"
+			),
+			(object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "A03",
+				"file" => "/dashcycles/core/boxes/box_waitingapprob.php",
+				"boxname" => "box_waitingapprob"
+			),
+			(object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "B01",
+				"file" => "/dashcycles/core/boxes/box_waitingpropal.php",
+				"boxname" => "box_waitingpropal"
+			),
+			(object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "B02",
+				"file" => "/core/boxes/box_factures_imp.php",
+				"boxname" => "box_factures_imp"
+			),
+			(object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "B03",
+				"file" => "/core/boxes/box_supplier_awaiting_reception.php",
+				"boxname" => "box_supplier_awaiting_reception"
+			)
+		);
+
+		foreach ($objs as $key => $obj){
+			// Starting by getting the box_id based on the file name
+			$sql = "SELECT b.rowid as rowid, bd.rowid as box_id, bd.note as note FROM ".MAIN_DB_PREFIX."boxes_def AS bd LEFT JOIN ".MAIN_DB_PREFIX.'boxes AS b ON bd.rowid = b.box_id WHERE bd.file = "'.$obj->file.'"';
+			$resql = $db->query($sql);
+			// print 'sql :'.$sql.' res : '.$resql;
+			$res = $db->fetch_object($resql);
+			$obj->rowid = $res->rowid;
+			$obj->box_id = $res->box_id;
+			$obj->note = $res->note;
+
+			// var_dump($obj);
+			// print '<br>';
+
+			dol_include_once($obj->file);
+			if(class_exists($obj->boxname)){
+				$box = new $obj->boxname($db, $obj->note);
+
+				$box->rowid = $obj->rowid;
+				$box->id = $obj->box_id;
+				$box->position =  $obj->position;
+				$box->box_order = $obj->box_order;
+				$box->fk_user = 0;
+				$box->sourcefile = $obj->file;
+				$box->class = $boxname;
+				$box->note = $obj->note;
+			}
+
+			$boxes[] = $box;
+		}
+
+		return $boxes;
 	}
 }

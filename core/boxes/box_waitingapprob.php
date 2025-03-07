@@ -30,9 +30,9 @@ include_once DOL_DOCUMENT_ROOT.'/core/boxes/modules_boxes.php';
  */
 class box_waitingapprob extends ModeleBoxes
 {
-	public $boxcode = "latestsupplierorders";
+	public $boxcode = "waitingsupplierorders";
 	public $boximg = "object_order";
-	public $boxlabel = "BoxLatestSupplierOrders";
+	public $boxlabel = "BoxWaitingSupplierOrders";
 	public $depends = array("fournisseur");
 
 	/**

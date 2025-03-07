@@ -58,6 +58,7 @@ if (!$res) {
 
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
+require_once DOL_DOCUMENT_ROOT.'/custom/dashcycles/core/modules/modDashCycles.class.php';
 
 // Load translation files required by the page
 $langs->loadLangs(array("dashcycles@dashcycles"));
@@ -111,9 +112,13 @@ print '<style>#id-left{display: none}</style>';
 
 print '<div class="fichecenter fichecenterbis">';
 
+
+$dash = new modDashCycles($db);
+$dashBoxes = $dash->listBoxes();
+
 // Créer un clone de cette fonction pour récupérer les widgets sélectionnés dans les paramètres du module
 // Se contenter de boxlista et boxlistb car ce sont les seuls que l'on utilise
-$resultboxes = FormOther::getBoxesArea($user, "0"); // Load $resultboxes (selectboxlist + boxactivated + boxlista + boxlistb)
+$resultboxes = $dash->getBoxesDashCycles($dashBoxes); // Load $resultboxes (selectboxlist + boxactivated + boxlista + boxlistb)
 
 $boxlist = '<div class="twocolumns">';
 

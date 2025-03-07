@@ -32,9 +32,9 @@ include_once DOL_DOCUMENT_ROOT.'/core/boxes/modules_boxes.php';
  */
 class box_progressshipment extends ModeleBoxes
 {
-	public $boxcode = "lastcustomershipments";
+	public $boxcode = "progressshipments";
 	public $boximg = "dolly";
-	public $boxlabel = "BoxLastCustomerShipments";
+	public $boxlabel = "BoxProgressShipments";
 	public $depends = array("expedition");
 
 	/**
