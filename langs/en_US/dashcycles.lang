@@ -67,3 +67,4 @@ DASHCYCLES_WIDGET_ORDER_UNDELIVERED = Show widget for orders waiting for shipmen
 DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT = Show widget for shipment in progress
 DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER = Show widget for supplier shipment in progress
 DASHCYCLES_WIDGET_WAITING_BILLS = Show widget for unpaid bills
+DASHCYCLES_MAX_LINES = Max number of lines
