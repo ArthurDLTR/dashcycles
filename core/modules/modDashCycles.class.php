@@ -573,7 +573,7 @@ class modDashCycles extends DolibarrModules
 		$boxlista .= "\n<!-- Box left container -->\n";
 	
 		// Define $box_max_lines
-		$box_max_lines = getDolUserInt('DASHCYCLES_MAX_LINES');
+		$box_max_lines = getDolGlobalInt('DASHCYCLES_MAX_LINES');
 	
 		$ii = 0;
 		foreach ($boxactivated as $key => $box) {
