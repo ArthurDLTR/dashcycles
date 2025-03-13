@@ -643,7 +643,8 @@ class modDashCycles extends DolibarrModules
 
 		$boxes = array();
 
-		$objs = array(
+		$objs = array();
+			/*
 			(object) array(
 				"position" => "0",
 				"box_id" => "-1",
@@ -675,18 +676,79 @@ class modDashCycles extends DolibarrModules
 			(object) array(
 				"position" => "0",
 				"box_id" => "-1",
-				"box_order" => "B02",
+				"box_order" => "B03",
 				"file" => "/core/boxes/box_factures_imp.php",
 				"boxname" => "box_factures_imp"
 			),
 			(object) array(
 				"position" => "0",
 				"box_id" => "-1",
-				"box_order" => "B03",
-				"file" => "/core/boxes/box_supplier_awaiting_reception.php",
-				"boxname" => "box_supplier_awaiting_reception"
+				"box_order" => "B02",
+				"file" => "/dashcycles/core/boxes/box_supplierordersreception.php",
+				"boxname" => "box_supplier_orders_awaiting_reception"
 			)
-		);
+		*/
+
+		// Add the boxes if set as Yes in settings of the module
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_ORDER_UNDELIVERED')){
+			array_push($objs, (object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "A01",
+				"file" => "/dashcycles/core/boxes/box_undeliveredorders.php",
+				"boxname" => "box_undeliveredorders"
+			));
+		}
+
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT')){
+			array_push($objs, (object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "A02",
+				"file" => "/dashcycles/core/boxes/box_progressshipment.php",
+				"boxname" => "box_progressshipment"
+			));
+		}
+		
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_APPROB')){
+			array_push($objs, (object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "A03",
+				"file" => "/dashcycles/core/boxes/box_waitingapprob.php",
+				"boxname" => "box_waitingapprob"
+			));
+		}
+
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_PROPALS')){
+			array_push($objs, (object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "B01",
+				"file" => "/dashcycles/core/boxes/box_waitingpropal.php",
+				"boxname" => "box_waitingpropal"
+			));
+		}
+
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER')){
+			array_push($objs, (object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "B02",
+				"file" => "/dashcycles/core/boxes/box_supplierordersreception.php",
+				"boxname" => "box_supplier_orders_awaiting_reception"
+			));
+		}
+
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_BILLS')){
+			array_push($objs, (object) array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => "B03",
+				"file" => "/core/boxes/box_factures_imp.php",
+				"boxname" => "box_factures_imp"
+			));
+		}
 
 		foreach ($objs as $key => $obj){
 			// Starting by getting the box_id based on the file name
