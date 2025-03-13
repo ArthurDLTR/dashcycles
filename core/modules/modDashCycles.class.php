@@ -588,7 +588,7 @@ class modDashCycles extends DolibarrModules
 			//print 'box_id : '.strtoupper($box->boxcode).' ';
 			//print 'box_order '.$boxactivated[$ii]->box_order.'<br>';
 			// Show box
-			$box->loadBox($box_max_lines);
+			$box->loadBox((getDolGlobalInt(strtoupper($box->boxcode)."_MAX_LINES") > 0) ? getDolGlobalInt(strtoupper($box->boxcode)."_MAX_LINES") : $box_max_lines);
 			$boxlista .= $box->showBox(null, null, 1);
 			}
 		}
