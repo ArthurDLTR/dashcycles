@@ -123,11 +123,46 @@ $item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 
 // Setup conf for the selection of widgets
 $formSetup->newItem('DASHCYCLES_WIDGET_WAITING_PROPALS')->setAsYesNo();
+if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_PROPALS')){
+	$formSetup->newItem('LASTWAITINGPROPALS_MAX_LINES');
+	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
+	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
+}
+
 $formSetup->newItem('DASHCYCLES_WIDGET_WAITING_APPROB')->setAsYesNo();
+if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_APPROB')){
+	$formSetup->newItem('WAITINGSUPPLIERORDERS_MAX_LINES');
+	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
+	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
+}
+
 $formSetup->newItem('DASHCYCLES_WIDGET_ORDER_UNDELIVERED')->setAsYesNo();
+if (getDolGlobalInt('DASHCYCLES_WIDGET_ORDER_UNDELIVERED')){
+	$formSetup->newItem('UNDELIVEREDORDERS_MAX_LINES');
+	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
+	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
+}
+
 $formSetup->newItem('DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT')->setAsYesNo();
+if (getDolGlobalInt('DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT')){
+	$formSetup->newItem('PROGRESSSHIPMENTS_MAX_LINES');
+	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
+	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
+}
+
 $formSetup->newItem('DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER')->setAsYesNo();
+if (getDolGlobalInt('DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER')){
+	$formSetup->newItem('SUPPLIERORDERSAWAITINGRECEPTION_MAX_LINES');
+	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
+	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
+}
+
 $formSetup->newItem('DASHCYCLES_WIDGET_WAITING_BILLS')->setAsYesNo();
+if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_BILLS')){
+	$formSetup->newItem('OLDESTUNPAIDCUSTOMERBILLS_MAX_LINES');
+	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
+	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
+}
 
 // Setup conf for a selection of an email template of type thirdparty
 // $formSetup->newItem('DASHCYCLES_MYPARAM6')->setAsEmailTemplate('thirdparty');

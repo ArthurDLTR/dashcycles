@@ -18,16 +18,16 @@
 #
 
 # Module label 'ModuleDashCyclesName'
-ModuleDashCyclesName = DashCycles
+ModuleDashCyclesName = Cycles de vente
 # Module description 'ModuleDashCyclesDesc'
-ModuleDashCyclesDesc = DashCycles description
+ModuleDashCyclesDesc = Module d'affichage d'un tableau de bord 
 
 #
 # Admin page
 #
-DashCyclesSetup = DashCycles paramètres
+DashCyclesSetup = Paramètres Cycles de vente
 Settings = Paramètres
-DashCyclesSetupPage = DashCycles setup page
+DashCyclesSetupPage = Page de paramétrage
 NewSection=New section
 DASHCYCLES_MYPARAM1 = My param 1
 DASHCYCLES_MYPARAM1Tooltip = My param 1 tooltip
@@ -39,8 +39,8 @@ DASHCYCLES_MYPARAM2Tooltip=My param 2 tooltip
 # About page
 #
 About = About
-DashCyclesAbout = About DashCycles
-DashCyclesAboutPage = DashCycles about page
+DashCyclesAbout = A propos 
+DashCyclesAboutPage = A propos
 
 #
 # Sample page
@@ -66,5 +66,12 @@ DASHCYCLES_WIDGET_WAITING_APPROB = Afficher le widget pour les commandes fournis
 DASHCYCLES_WIDGET_ORDER_UNDELIVERED = Afficher le widget pour les commandes à livrer
 DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT = Afficher le widget pour les commandes livrées partiellement
 DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER = Afficher le widget pour les commandes fournisseurs en attente de réception
-DASHCYCLES_WIDGET_WAITING_BILLS = Zfficher le widget pour les factures non payées
+DASHCYCLES_WIDGET_WAITING_BILLS = Afficher le widget pour les factures non payées
 DASHCYCLES_MAX_LINES = Nombre maximum de lignes affichées
+
+LASTWAITINGPROPALS_MAX_LINES = Nombre de lignes affichées pour les propales en attente
+WAITINGSUPPLIERORDERS_MAX_LINES = Nombre de lignes affichées pour les commandes fournisseurs en attente d'approbation
+UNDELIVEREDORDERS_MAX_LINES = Nombre de lignes affichées pour les commandes non livrées
+PROGRESSSHIPMENTS_MAX_LINES = Nombre de lignes affichés pour les commandes partiellement livrées
+SUPPLIERORDERSAWAITINGRECEPTION_MAX_LINES = Nombre de lignes affichés pour les commandes fournisseurs non réceptionnées
+OLDESTUNPAIDCUSTOMERBILLS_MAX_LINES = Nombre de lignes affichés pour les factures impayées

@@ -68,3 +68,10 @@ DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT = Show widget for shipment in progress
 DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER = Show widget for supplier shipment in progress
 DASHCYCLES_WIDGET_WAITING_BILLS = Show widget for unpaid bills
 DASHCYCLES_MAX_LINES = Max number of lines
+
+LASTWAITINGPROPALS_MAX_LINES = Number of lines to display for propals waiting
+WAITINGSUPPLIERORDERS_MAX_LINES = Number of lines to display for supplier orders waiting for approbation
+UNDELIVEREDORDERS_MAX_LINES = Number of lines to display for undelivered orders
+PROGRESSSHIPMENTS_MAX_LINES = Number of lines to display for shipment in progress
+SUPPLIERORDERSAWAITINGRECEPTION_MAX_LINES = Number of lines to display for supplier shipment in progress
+OLDESTUNPAIDCUSTOMERBILLS_MAX_LINES = Number of lines to display for unpaid bills

@@ -585,7 +585,7 @@ class modDashCycles extends DolibarrModules
 			}
 			if (preg_match('/^A/i', $box->box_order)) { // column A
 			$ii++;
-			//print 'box_id '.$boxactivated[$ii]->box_id.' ';
+			//print 'box_id : '.strtoupper($box->boxcode).' ';
 			//print 'box_order '.$boxactivated[$ii]->box_order.'<br>';
 			// Show box
 			$box->loadBox($box_max_lines);
@@ -613,10 +613,10 @@ class modDashCycles extends DolibarrModules
 			}
 			if (preg_match('/^B/i', $box->box_order)) { // colonne B
 			$ii++;
-			//print 'box_id '.$boxactivated[$ii]->box_id.' ';
+			//print 'box_id : '.getDolGlobalInt(strtoupper($box->boxcode)).' ';
 			//print 'box_order '.$boxactivated[$ii]->box_order.'<br>';
 			// Show box
-			$box->loadBox($box_max_lines);
+			$box->loadBox((getDolGlobalInt(strtoupper($box->boxcode)."_MAX_LINES") > 0) ? getDolGlobalInt(strtoupper($box->boxcode)."_MAX_LINES") : $box_max_lines);
 			$boxlistb .= $box->showBox(null, null, 1);
 			}
 		}
