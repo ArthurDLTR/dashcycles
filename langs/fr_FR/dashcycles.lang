@@ -1,0 +1,77 @@
+# Copyright (C) 2025 Atu SuperAdmin <arthurl52100@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+#
+# Generic
+#
+
+# Module label 'ModuleDashCyclesName'
+ModuleDashCyclesName = Cycles de vente
+# Module description 'ModuleDashCyclesDesc'
+ModuleDashCyclesDesc = Module d'affichage d'un tableau de bord 
+
+#
+# Admin page
+#
+DashCyclesSetup = Paramètres Cycles de vente
+Settings = Paramètres
+DashCyclesSetupPage = Page de paramétrage
+NewSection=New section
+DASHCYCLES_MYPARAM1 = My param 1
+DASHCYCLES_MYPARAM1Tooltip = My param 1 tooltip
+DASHCYCLES_MYPARAM2=My param 2
+DASHCYCLES_MYPARAM2Tooltip=My param 2 tooltip
+
+
+#
+# About page
+#
+About = About
+DashCyclesAbout = A propos 
+DashCyclesAboutPage = A propos
+
+#
+# Sample page
+#
+DashCyclesArea = Page de cycles de vente
+MyPageName = My page name
+
+#
+# Sample widget
+#
+MyWidget = My widget
+MyWidgetDescription = My widget description
+BoxLastWaitingProposals = Dernières propales en attente de signature
+
+SALES_CYCLES = Cycles de vente
+
+#
+# Settings page
+#
+DASHCYCLES_RELOAD_FREQUENCY = Fréquence de rafraichissement de la page
+DASHCYCLES_WIDGET_WAITING_PROPALS = Afficher le widget de propales en attente de réponse
+DASHCYCLES_WIDGET_WAITING_APPROB = Afficher le widget pour les commandes fournisseurs en attente de confirmation
+DASHCYCLES_WIDGET_ORDER_UNDELIVERED = Afficher le widget pour les commandes à livrer
+DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT = Afficher le widget pour les commandes livrées partiellement
+DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER = Afficher le widget pour les commandes fournisseurs en attente de réception
+DASHCYCLES_WIDGET_WAITING_BILLS = Afficher le widget pour les factures non payées
+DASHCYCLES_MAX_LINES = Nombre maximum de lignes affichées
+
+LASTWAITINGPROPALS_MAX_LINES = Nombre de lignes affichées pour les propales en attente
+WAITINGSUPPLIERORDERS_MAX_LINES = Nombre de lignes affichées pour les commandes fournisseurs en attente d'approbation
+UNDELIVEREDORDERS_MAX_LINES = Nombre de lignes affichées pour les commandes non livrées
+PROGRESSSHIPMENTS_MAX_LINES = Nombre de lignes affichés pour les commandes partiellement livrées
+SUPPLIERORDERSAWAITINGRECEPTION_MAX_LINES = Nombre de lignes affichés pour les commandes fournisseurs non réceptionnées
+OLDESTUNPAIDCUSTOMERBILLS_MAX_LINES = Nombre de lignes affichés pour les factures impayées
