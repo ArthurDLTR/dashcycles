@@ -366,6 +366,24 @@ class modDashCycles extends DolibarrModules
 			'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
 			'object'=>'MyObject'
 		);
+
+		$this->menu[$r++]=array(
+			'fk_menu'=>'fk_mainmenu=commercial',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
+			'type'=>'left',                          // This is a Left menu entry
+			'titre'=>$langs->trans('SUPPLIERS_ORDERS'),
+			'prefix' => img_picto('', $this->picto, 'class="pictofixedwidth valignmiddle paddingright"'),
+			'mainmenu'=>'dashcycles',
+			'leftmenu'=>'myobject',
+			'url'=>'/dashcycles/suppliersorders.php',
+			'langs'=>'dashcycles@dashcycles',        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+			'position'=>1010+$r,
+			'enabled'=>'isModEnabled("dashcycles")', // Define condition to show or hide menu entry. Use 'isModEnabled("dashcycles")' if entry must be visible if module is enabled.
+			'perms'=>1,
+			'target'=>'',
+			'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
+			'object'=>'MyObject'
+		);
+
 		/*
 		$this->menu[$r++]=array(
 			'fk_menu'=>'fk_mainmenu=dashcycles,fk_leftmenu=myobject',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
