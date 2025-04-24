@@ -88,12 +88,12 @@ class box_progressshipment extends ModeleBoxes
 			$sql .= ", e.fk_user_valid";
 			$sql .= ", c.ref as commande_ref";
 			$sql .= ", c.rowid as commande_id";
-			$sql .= ", ed.fk_expedition, ed.fk_elementdet, SUM(ed.qty) as qty_ttes_expe, SUM(cd.qty) as qty_comm";
+			$sql .= ", ed.fk_expedition, ed.fk_origin_line, SUM(ed.qty) as qty_ttes_expe, SUM(cd.qty) as qty_comm";
 			$sql .= " FROM ".MAIN_DB_PREFIX."expedition as e";
 			$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."element_element as el ON e.rowid = el.fk_target AND el.targettype = 'shipping' AND el.sourcetype IN ('commande')";
 			$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."commande as c ON el.fk_source = c.rowid AND el.sourcetype IN ('commande') AND el.targettype = 'shipping'";
 			$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."expeditiondet as ed on e.rowid = ed.fk_expedition";
-			$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."commandedet as cd on cd.rowid = ed.fk_elementdet";
+			$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."commandedet as cd on cd.rowid = ed.fk_origin_line";
 			$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."societe as s ON s.rowid = e.fk_soc";
 			if (!$user->hasRight('societe', 'client', 'voir')) {
 				$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."societe_commerciaux as sc ON e.fk_soc = sc.fk_soc";
