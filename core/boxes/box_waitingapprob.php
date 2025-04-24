@@ -87,7 +87,7 @@ class box_waitingapprob extends ModeleBoxes
 			if (!$user->hasRight('societe', 'client', 'voir')) {
 				$sql .= ", ".MAIN_DB_PREFIX."societe_commerciaux as sc";
 			}
-			$sql .= " WHERE c.fk_soc = s.rowid AND c.fk_statut = 2";
+			$sql .= " WHERE c.fk_soc = s.rowid AND c.fk_statut = 0";
 			$sql .= " AND c.entity IN (".getEntity('supplier_order').")";
 			if (!$user->hasRight('societe', 'client', 'voir')) {
 				$sql .= " AND s.rowid = sc.fk_soc AND sc.fk_user = ".((int) $user->id);
