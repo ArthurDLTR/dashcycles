@@ -1,0 +1,19 @@
+.sticker {
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#to-complete{
+    background-color: aquamarine;
+}
+#to-send{
+    background-color: purple;
+}
+#approved{
+    background-color: darkcyan;
+}
+#send{
+    background-color: forestgreen;
+}

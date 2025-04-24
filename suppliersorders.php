@@ -57,20 +57,62 @@ if (!$res) {
 $langs->loadLangs(array("dashcycles@dashcycles"));
 
 require_once DOL_DOCUMENT_ROOT.'/societe/class/societe.class.php';
-$soc = new Societe($db);
+require_once DOL_DOCUMENT_ROOT.'/fourn/class/fournisseur.commande.class.php';
 
 llxHeader("", $langs->trans("SUPPLIERS_ORDERS_PAGE"), '', '', 0, 0, '', '', '', 'mod-dash-cycles page-index');
 
 print load_fiche_titre($langs->trans("SUPPLIERS_ORDERS_PAGE"), '', 'dash.png@dashcycles');
-$soc->fetch_origin(1271);
-print $soc->nom;
 
-$sql = "SELECT c.ref, c.fk_statut, s.nom FROM ".MAIN_DB_PREFIX."llx_commande_fournisseur as c LEFT JOIN ".MAIN_DB_PREFIX."llx_societe as s on s.rowid = c.fk_soc WHERE c.fk_statut < 4;";
+$sql = "SELECT c.ref as comm_ref, c.rowid as comm_id, c.fk_statut as comm_statut, c.entity as comm_entity, c.date_valid as comm_valid, c.date_approve as comm_approuv, c.date_commande as comm_commande, s.nom as soc_nom, s.rowid as soc_id, s.logo as soc_logo, s.status as soc_status FROM ".MAIN_DB_PREFIX."commande_fournisseur as c LEFT JOIN ".MAIN_DB_PREFIX."societe as s on s.rowid = c.fk_soc WHERE c.fk_statut < 4";
+// print "Requete : ".$sql."<br>";
 
 $resql = $db->query($sql);
-print "res".$resql;
+
+$soc = new Societe($db);
+$comm = new CommandeFournisseur($db);
 
 if ($resql){
-    $num = $db->num_rows($resql);
-    print "Nombre de lignes : ".$num;
+	$num = $db->num_rows($resql);
+	
+    print '<table class="noborder centpercent">';
+    print '<tr class="liste_titre">';
+    print '<th>Fournisseurs</th>';
+    print '<th>Commande</th>';
+    print '<th>Etat de la commande</th>';
+	print '</tr>';	
+
+
+	for ($i = 0; $i < $num; $i++){
+		$obj = $db->fetch_object($resql);
+
+		$soc->id = $obj->soc_id;
+		$soc->name = $obj->soc_nom;
+		$soc->logo = $obj->soc_logo;
+		$soc->status = $obj->soc_status;
+		
+
+		$comm->id = $obj->comm_id;
+		$comm->ref = $obj->comm_ref;
+		$comm->status = $obj->comm_statut;
+		$comm->entity = $obj->comm_entity;
+
+		print '<tr class="oddeven">';
+		print '<td class="tdoverflowmax200" data-ker="ref">' . $soc->getNomUrl(1, 'supplier', 100, 0, 1, 1) .'</td>';
+		print '<td class="nowrap">'.$comm->getNomUrl(1).'</td>';
+		switch ($comm->status){
+			case 0:
+				print '<td class="nowrap"><span class="sticker" id="to-complete">A compléter</span></td>';
+				break;
+			case 1:
+				print '<td class="nowrap"><span class="sticker" id="to-send">A envoyer</span></td>';
+				break;
+			case 2:
+				print '<td class="nowrap"><span class="sticker" id="approved">Envoyée le '.date("d/m",strtotime($obj->comm_valid)).'</span></td>';
+				break;
+			case 3:
+				print '<td class="nowrap"><span class="sticker" id="send">Validée le '.date("d/m",strtotime($obj->comm_commande)).'</span></td>';
+				break;
+		}
+		print '</tr>';	
+	}
 }
