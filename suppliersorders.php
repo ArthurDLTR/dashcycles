@@ -72,7 +72,8 @@ $sec = getDolGlobalInt('DASHCYCLES_RELOAD_FREQUENCY'); // Recover the value of r
 llxHeader("", $langs->trans("DashCyclesArea"), '', '', 0, 0, '', '', '', 'mod-dashcycles page-index');
 print load_fiche_titre($langs->trans("SUPPLIERS_ORDERS_PAGE"), '', 'dash.png@dashcycles');
 print '<meta http-equiv="refresh" content="'.$sec.';URL='.$_SERVER['PHP_SELF'].'">'; // html tag to force the reload of the page based on $sec
-print '<style>#id-left{display: none}</style>';
+print '<link href="css/dashcycles.css" rel="stylesheet"></link>';
+// print '<style>#id-left{display: none}</style>';
 
 if ($resql){
 	$num = $db->num_rows($resql);

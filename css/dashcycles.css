@@ -5,6 +5,10 @@
     font-weight: bold;
 }
 
+#id-left{
+    display: none;
+}
+
 #to-complete{
     background-color: aquamarine;
 }
