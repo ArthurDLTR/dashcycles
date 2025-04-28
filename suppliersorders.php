@@ -59,9 +59,6 @@ $langs->loadLangs(array("dashcycles@dashcycles"));
 require_once DOL_DOCUMENT_ROOT.'/societe/class/societe.class.php';
 require_once DOL_DOCUMENT_ROOT.'/fourn/class/fournisseur.commande.class.php';
 
-llxHeader("", $langs->trans("SUPPLIERS_ORDERS_PAGE"), '', '', 0, 0, '', '', '', 'mod-dash-cycles page-index');
-
-print load_fiche_titre($langs->trans("SUPPLIERS_ORDERS_PAGE"), '', 'dash.png@dashcycles');
 
 $sql = "SELECT c.ref as comm_ref, c.rowid as comm_id, c.fk_statut as comm_statut, c.entity as comm_entity, c.date_valid as comm_valid, c.date_approve as comm_approuv, c.date_commande as comm_commande, s.nom as soc_nom, s.rowid as soc_id, s.logo as soc_logo, s.status as soc_status FROM ".MAIN_DB_PREFIX."commande_fournisseur as c LEFT JOIN ".MAIN_DB_PREFIX."societe as s on s.rowid = c.fk_soc WHERE c.fk_statut < 4";
 // print "Requete : ".$sql."<br>";
@@ -70,6 +67,12 @@ $resql = $db->query($sql);
 
 $soc = new Societe($db);
 $comm = new CommandeFournisseur($db);
+
+$sec = getDolGlobalInt('DASHCYCLES_RELOAD_FREQUENCY'); // Recover the value of refresh frequency
+llxHeader("", $langs->trans("DashCyclesArea"), '', '', 0, 0, '', '', '', 'mod-dashcycles page-index');
+print load_fiche_titre($langs->trans("SUPPLIERS_ORDERS_PAGE"), '', 'dash.png@dashcycles');
+print '<meta http-equiv="refresh" content="'.$sec.';URL='.$_SERVER['PHP_SELF'].'">'; // html tag to force the reload of the page based on $sec
+print '<style>#id-left{display: none}</style>';
 
 if ($resql){
 	$num = $db->num_rows($resql);
@@ -115,4 +118,6 @@ if ($resql){
 		}
 		print '</tr>';	
 	}
+
+	print '</table>';
 }
