@@ -77,12 +77,15 @@ print '<link href="css/dashcycles.css" rel="stylesheet"></link>';
 
 if ($resql){
 	$num = $db->num_rows($resql);
+	$size = getDolGlobalInt('SUPPLIERS_ORDERS_SIZE');
 	
     print '<table class="noborder centpercent">';
     print '<tr class="liste_titre">';
-    print '<th>Fournisseurs</th>';
-    print '<th>Commande</th>';
-    print '<th>Etat de la commande</th>';
+	for ($i = 0; $i < $size; $i++){
+		print '<th>Fournisseurs</th>';
+		print '<th>Commande</th>';
+		print '<th>Etat de la commande</th>';
+	}
 	print '</tr>';	
 
 
@@ -99,8 +102,9 @@ if ($resql){
 		$comm->ref = $obj->comm_ref;
 		$comm->status = $obj->comm_statut;
 		$comm->entity = $obj->comm_entity;
-
-		print '<tr class="oddeven">';
+		if ($i % $size == 0){
+			print '<tr class="oddeven">';
+		}
 		print '<td class="tdoverflowmax200" data-ker="ref">' . $soc->getNomUrl(1, 'supplier', 100, 0, 1, 1) .'</td>';
 		print '<td class="nowrap">'.$comm->getNomUrl(1).'</td>';
 		switch ($comm->status){
@@ -117,7 +121,9 @@ if ($resql){
 				print '<td class="nowrap"><span class="sticker" id="send">Validée le '.date("d/m",strtotime($obj->comm_commande)).'</span></td>';
 				break;
 		}
-		print '</tr>';	
+		if ($i % $size == $size - 1){
+			print '</tr>';	
+		}
 	}
 
 	print '</table>';

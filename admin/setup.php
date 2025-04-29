@@ -109,10 +109,16 @@ $item = $formSetup->newItem('DASHCYCLES_RELOAD_FREQUENCY');
 $item->defaultFieldValue = '15';
 $item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_RELOAD_FREQUENCY');
 
-// Setuf for number of lines in the widgets
+// Setup for number of lines in the widgets
 $item = $formSetup->newItem('DASHCYCLES_MAX_LINES');
 $item->defaultFieldValue = '10';
 $item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
+
+// Parameter to choose the number of columns in the suppliers' orders page
+$item = $formSetup->newItem('SUPPLIERS_ORDERS_SIZE');
+$item->defaultFieldValue = '1';
+$item->fieldAttr['placeholder'] = $langs->trans('SUPPLIERS_ORDERS_SIZE');
+
 // Setup conf for selection of a simple textarea input but we replace the text of field title
 // $item = $formSetup->newItem('DASHCYCLES_MYPARAM3');
 // $item->nameText = $item->getNameText().' more html text ';
