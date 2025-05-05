@@ -67,81 +67,73 @@ print '<meta http-equiv="refresh" content="'.$sec.';URL='.$_SERVER['PHP_SELF'].'
 print '<link href="css/dashcycles.css" rel="stylesheet"></link>';
 // print '<style>#id-left{display: none}</style>';
 
+$sql = '';
 // Table display depending on the parameter of the module
 if (getDolGlobalString('SUPPLIERS_ORDERS_CHOICE') == 'byOrder'){
 	$sql = "SELECT c.ref as comm_ref, c.rowid as comm_id, c.fk_statut as comm_statut, c.entity as comm_entity, c.date_valid as comm_valid, c.date_approve as comm_approuv, c.date_commande as comm_commande, s.nom as soc_nom, s.rowid as soc_id, s.logo as soc_logo, s.status as soc_status FROM ".MAIN_DB_PREFIX."commande_fournisseur as c LEFT JOIN ".MAIN_DB_PREFIX."societe as s on s.rowid = c.fk_soc WHERE c.fk_statut < 4";
 	// print "Requete : ".$sql."<br>";
-
-	$resql = $db->query($sql);
-
-	$soc = new Societe($db);
-	$comm = new CommandeFournisseur($db);
-
-
-	if ($resql){
-		$num = $db->num_rows($resql);
-		$size = getDolGlobalInt('SUPPLIERS_ORDERS_SIZE');
-		
-		print '<table class="noborder centpercent">';
-		print '<tr class="liste_titre">';
-		for ($i = 0; $i < $size; $i++){
-			print '<th>Fournisseurs</th>';
-			print '<th>Commande</th>';
-			print '<th>Etat de la commande</th>';
-		}
-		print '</tr>';	
-
-
-		for ($i = 0; $i < $num; $i++){
-			$obj = $db->fetch_object($resql);
-
-			$soc->id = $obj->soc_id;
-			$soc->name = $obj->soc_nom;
-			$soc->logo = $obj->soc_logo;
-			$soc->status = $obj->soc_status;
-			
-
-			$comm->id = $obj->comm_id;
-			$comm->ref = $obj->comm_ref;
-			$comm->status = $obj->comm_statut;
-			$comm->entity = $obj->comm_entity;
-			if ($i % $size == 0){
-				print '<tr class="oddeven">';
-			}
-			print '<td class="tdoverflowmax200" data-ker="ref">' . $soc->getNomUrl(1, 'supplier', 100, 0, 1, 1) .'</td>';
-			print '<td class="nowrap">'.$comm->getNomUrl(1).'</td>';
-			switch ($comm->status){
-				case 0:
-					print '<td class="nowrap"><span class="sticker" id="to-complete">A compléter</span></td>';
-					break;
-				case 1:
-					print '<td class="nowrap"><span class="sticker" id="to-send">A envoyer</span></td>';
-					break;
-				case 2:
-					print '<td class="nowrap"><span class="sticker" id="approved">Envoyée le '.date("d/m",strtotime($obj->comm_valid)).'</span></td>';
-					break;
-				case 3:
-					print '<td class="nowrap"><span class="sticker" id="send">Validée le '.date("d/m",strtotime($obj->comm_commande)).'</span></td>';
-					break;
-			}
-			if ($i % $size == $size - 1){
-				print '</tr>';	
-			}
-		}
-
-		print '</table>';
-	}
 }
 
 if (getDolGlobalString('SUPPLIERS_ORDERS_CHOICE') == 'bySupplier'){
-	// SQL Request to get all the suppliers with atleast an order in draft or not received and get only the oldest one
-	$sql = 'SELECT '; // Requête à améliorer juste en dessous
-	
-	// SELECT cf.ref, cf.date_creation, s.nom FROM dolibarr.llx_commande_fournisseur as cf
-	// LEFT JOIN dolibarr.llx_societe as s on s.rowid = cf.fk_soc
-	// WHERE cf.
-	// GROUP BY cf.fk_soc
-	// ORDER BY cf.date_commande ASC
+	$sql = 'SELECT c.ref as comm_ref, c.rowid as comm_id, c.fk_statut as comm_statut, c.entity as comm_entity, s.nom as soc_nom, s.rowid as soc_id, s.logo as soc_logo, s.status as soc_status FROM '.MAIN_DB_PREFIX.'commande_fournisseur AS c LEFT JOIN '.MAIN_DB_PREFIX.'societe AS s ON s.rowid = c.fk_soc WHERE c.fk_statut < 4';
+	$sql.= ' GROUP BY c.fk_soc ORDER BY c.date_commande ASC';
+}
+$resql = $db->query($sql);
 
-	print 'Par fournisseur';
+$soc = new Societe($db);
+$comm = new CommandeFournisseur($db);
+
+
+if ($resql){
+	$num = $db->num_rows($resql);
+	$size = getDolGlobalInt('SUPPLIERS_ORDERS_SIZE');
+	
+	print '<table class="noborder centpercent">';
+	print '<tr class="liste_titre">';
+	for ($i = 0; $i < $size; $i++){
+		print '<th>Fournisseurs</th>';
+		print '<th>Commande</th>';
+		print '<th>Etat de la commande</th>';
+	}
+	print '</tr>';	
+
+
+	for ($i = 0; $i < $num; $i++){
+		$obj = $db->fetch_object($resql);
+
+		$soc->id = $obj->soc_id;
+		$soc->name = $obj->soc_nom;
+		$soc->logo = $obj->soc_logo;
+		$soc->status = $obj->soc_status;
+		
+
+		$comm->id = $obj->comm_id;
+		$comm->ref = $obj->comm_ref;
+		$comm->status = $obj->comm_statut;
+		$comm->entity = $obj->comm_entity;
+		if ($i % $size == 0){
+			print '<tr class="oddeven">';
+		}
+		print '<td class="tdoverflowmax200" data-ker="ref">' . $soc->getNomUrl(1, 'supplier', 100, 0, 1, 1) .'</td>';
+		print '<td class="nowrap">'.$comm->getNomUrl(1).'</td>';
+		switch ($comm->status){
+			case 0:
+				print '<td class="nowrap"><span class="sticker" id="to-complete">A compléter</span></td>';
+				break;
+			case 1:
+				print '<td class="nowrap"><span class="sticker" id="to-send">A envoyer</span></td>';
+				break;
+			case 2:
+				print '<td class="nowrap"><span class="sticker" id="approved">Envoyée le '.date("d/m",strtotime($obj->comm_valid)).'</span></td>';
+				break;
+			case 3:
+				print '<td class="nowrap"><span class="sticker" id="send">Validée le '.date("d/m",strtotime($obj->comm_commande)).'</span></td>';
+				break;
+		}
+		if ($i % $size == $size - 1){
+			print '</tr>';	
+		}
+	}
+
+	print '</table>';
 }
