@@ -119,6 +119,15 @@ $item = $formSetup->newItem('SUPPLIERS_ORDERS_SIZE');
 $item->defaultFieldValue = '1';
 $item->fieldAttr['placeholder'] = $langs->trans('SUPPLIERS_ORDERS_SIZE');
 
+// Choose the way the suppliers' orders page works
+$TField = array(
+	'byOrder' => $langs->trans('SUPPLIERS_ORDERS_ORDER'),
+	'bySupplier' => $langs->trans('SUPPLIERS_ORDERS_SUPPLIER'),
+);
+
+// Setup conf to choose between byOrder and bySupplier
+$formSetup->newItem('SUPPLIERS_ORDERS_CHOICE')->setAsSelect($TField);
+
 // Setup conf for selection of a simple textarea input but we replace the text of field title
 // $item = $formSetup->newItem('DASHCYCLES_MYPARAM3');
 // $item->nameText = $item->getNameText().' more html text ';
@@ -182,17 +191,6 @@ if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_BILLS')){
 // Add a title for a new section
 // $formSetup->newItem('NewSection')->setAsTitle();
 
-// $TField = array(
-// 	'test01' => $langs->trans('test01'),
-// 	'test02' => $langs->trans('test02'),
-// 	'test03' => $langs->trans('test03'),
-// 	'test04' => $langs->trans('test04'),
-// 	'test05' => $langs->trans('test05'),
-// 	'test06' => $langs->trans('test06'),
-// );
-
-// Setup conf for a simple combo list
-// $formSetup->newItem('DASHCYCLES_MYPARAM9')->setAsSelect($TField);
 
 // Setup conf for a multiselect combo list
 // $item = $formSetup->newItem('DASHCYCLES_MYPARAM10');

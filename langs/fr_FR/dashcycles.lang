@@ -61,6 +61,12 @@ SALES_CYCLES = Cycles de vente
 # Settings page
 #
 DASHCYCLES_RELOAD_FREQUENCY = Fréquence de rafraichissement de la page
+
+SUPPLIERS_ORDERS_SIZE = Nombre de colonnes pour la page des commandes fournisseurs
+SUPPLIERS_ORDERS_ORDER = Par commande fournisseur
+SUPPLIERS_ORDERS_SUPPLIER = Par fournisseur
+SUPPLIERS_ORDERS_CHOICE = Choix de la méthode d'affichage de la page des commandes fournisseurs
+
 DASHCYCLES_WIDGET_WAITING_PROPALS = Afficher le widget de propales en attente de réponse
 DASHCYCLES_WIDGET_WAITING_APPROB = Afficher le widget pour les commandes fournisseurs en attente de confirmation
 DASHCYCLES_WIDGET_ORDER_UNDELIVERED = Afficher le widget pour les commandes à livrer

@@ -61,6 +61,12 @@ SALES_CYCLES = Sales cycles
 # Settings page
 #
 DASHCYCLES_RELOAD_FREQUENCY = Reload Frequency of the page
+
+SUPPLIERS_ORDERS_SIZE = Numbers of columns in suppliers orders page
+SUPPLIERS_ORDERS_ORDER = By supplier's order
+SUPPLIERS_ORDERS_SUPPLIER = By supplier
+SUPPLIERS_ORDERS_CHOICE = Choice for the method of display in the suppliers' orders page
+
 DASHCYCLES_WIDGET_WAITING_PROPALS = Show widget for propals waiting for response
 DASHCYCLES_WIDGET_WAITING_APPROB = Show widget for supplier orders waiting for confirmation
 DASHCYCLES_WIDGET_ORDER_UNDELIVERED = Show widget for orders waiting for shipment
