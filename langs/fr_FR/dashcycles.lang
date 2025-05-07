@@ -55,9 +55,9 @@ MyWidget = My widget
 MyWidgetDescription = My widget description
 BoxLastWaitingProposals = Dernières propales en attente de signature
 
-SALES_CYCLES = Cycles de vente
-SALES_CYCLES_FIRST = Cycles de vente 1
-SALES_CYCLES_SECOND = Cycles de vente 2
+SALES_CYCLES = Cycles de vente et d'achat
+SALES_CYCLES_FIRST = Cycles d'achat
+SALES_CYCLES_SECOND = Cycles de vente
 
 #
 # Settings page

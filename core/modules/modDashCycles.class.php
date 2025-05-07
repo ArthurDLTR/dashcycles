@@ -763,7 +763,7 @@ class modDashCycles extends DolibarrModules
 			array_push($objs, (object) array(
 				"position" => "0",
 				"box_id" => "-1",
-				"box_order" => "A03",
+				"box_order" => "B02",
 				"file" => "/dashcycles/core/boxes/box_waitingapprob.php",
 				"boxname" => "box_waitingapprob"
 			));
@@ -783,7 +783,7 @@ class modDashCycles extends DolibarrModules
 			array_push($objs, (object) array(
 				"position" => "0",
 				"box_id" => "-1",
-				"box_order" => "B02",
+				"box_order" => "A03",
 				"file" => "/dashcycles/core/boxes/box_supplierordersreception.php",
 				"boxname" => "box_supplier_orders_awaiting_reception"
 			));

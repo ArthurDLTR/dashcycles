@@ -182,20 +182,18 @@ if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_BILLS')){
 /**
  * Suppliers orders settings
  */
-// $formSetup->newItem("SUPPLIERS_ORDERS_SETTINGS")->setAsTitle();
-// // Parameter to choose the number of columns in the suppliers' orders page
-// $item = $formSetup->newItem('SUPPLIERS_ORDERS_SIZE');
-// $item->defaultFieldValue = '1';
-// $item->fieldAttr['placeholder'] = $langs->trans('SUPPLIERS_ORDERS_SIZE');
-
-// // Choose the way the suppliers' orders page works
-// $TField = array(
-// 	'byOrder' => $langs->trans('SUPPLIERS_ORDERS_ORDER'),
-// 	'bySupplier' => $langs->trans('SUPPLIERS_ORDERS_SUPPLIER'),
-// );
-
-// // Setup conf to choose between byOrder and bySupplier
-// $formSetup->newItem('SUPPLIERS_ORDERS_CHOICE')->setAsSelect($TField);
+$formSetup->newItem("SUPPLIERS_ORDERS_SETTINGS")->setAsTitle();
+// Parameter to choose the number of columns in the suppliers' orders page
+$item = $formSetup->newItem('SUPPLIERS_ORDERS_SIZE');
+$item->defaultFieldValue = '1';
+$item->fieldAttr['placeholder'] = $langs->trans('SUPPLIERS_ORDERS_SIZE');
+// Choose the way the suppliers' orders page works
+$TField = array(
+	'byOrder' => $langs->trans('SUPPLIERS_ORDERS_ORDER'),
+	'bySupplier' => $langs->trans('SUPPLIERS_ORDERS_SUPPLIER'),
+);
+// Setup conf to choose between byOrder and bySupplier
+$formSetup->newItem('SUPPLIERS_ORDERS_CHOICE')->setAsSelect($TField);
 
 
 
