@@ -104,6 +104,9 @@ if (!$user->admin) {
 // $item->fieldOverride = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
 // $item->cssClass = 'minwidth500';
 
+/**
+ * Dash cycles settings
+ */
 // Setup conf for selection of a simple string input
 $item = $formSetup->newItem('DASHCYCLES_RELOAD_FREQUENCY');
 $item->defaultFieldValue = '15';
@@ -114,19 +117,13 @@ $item = $formSetup->newItem('DASHCYCLES_MAX_LINES');
 $item->defaultFieldValue = '10';
 $item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 
-// Parameter to choose the number of columns in the suppliers' orders page
-$item = $formSetup->newItem('SUPPLIERS_ORDERS_SIZE');
-$item->defaultFieldValue = '1';
-$item->fieldAttr['placeholder'] = $langs->trans('SUPPLIERS_ORDERS_SIZE');
-
-// Choose the way the suppliers' orders page works
-$TField = array(
-	'byOrder' => $langs->trans('SUPPLIERS_ORDERS_ORDER'),
-	'bySupplier' => $langs->trans('SUPPLIERS_ORDERS_SUPPLIER'),
+// Setup to choose the display of the dash cycles
+$displayChoices = array(
+	'single' => $langs->trans('DASHCYCLES_SINGLE_VIEW'),
+	'double' => $langs->trans('DASHCYCLES_DOUBLE_VIEW'),
 );
+$formSetup->newItem('DASHCYCLES_DISPLAY')->setAsSelect($displayChoices);
 
-// Setup conf to choose between byOrder and bySupplier
-$formSetup->newItem('SUPPLIERS_ORDERS_CHOICE')->setAsSelect($TField);
 
 // Setup conf for selection of a simple textarea input but we replace the text of field title
 // $item = $formSetup->newItem('DASHCYCLES_MYPARAM3');
@@ -136,7 +133,10 @@ $formSetup->newItem('SUPPLIERS_ORDERS_CHOICE')->setAsSelect($TField);
 // $item = $formSetup->newItem('DASHCYCLES_MYPARAM4');
 // $item->setAsThirdpartyType();
 
-// Setup conf for the selection of widgets
+/**
+ * Settings for the widgets
+ */
+$formSetup->newItem("DASHCYCLES_WIDGETS_SETTINGS")->setAsTitle();
 $formSetup->newItem('DASHCYCLES_WIDGET_WAITING_PROPALS')->setAsYesNo();
 if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_PROPALS')){
 	$formSetup->newItem('LASTWAITINGPROPALS_MAX_LINES');
@@ -178,6 +178,26 @@ if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_BILLS')){
 	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
 	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 }
+
+/**
+ * Suppliers orders settings
+ */
+// $formSetup->newItem("SUPPLIERS_ORDERS_SETTINGS")->setAsTitle();
+// // Parameter to choose the number of columns in the suppliers' orders page
+// $item = $formSetup->newItem('SUPPLIERS_ORDERS_SIZE');
+// $item->defaultFieldValue = '1';
+// $item->fieldAttr['placeholder'] = $langs->trans('SUPPLIERS_ORDERS_SIZE');
+
+// // Choose the way the suppliers' orders page works
+// $TField = array(
+// 	'byOrder' => $langs->trans('SUPPLIERS_ORDERS_ORDER'),
+// 	'bySupplier' => $langs->trans('SUPPLIERS_ORDERS_SUPPLIER'),
+// );
+
+// // Setup conf to choose between byOrder and bySupplier
+// $formSetup->newItem('SUPPLIERS_ORDERS_CHOICE')->setAsSelect($TField);
+
+
 
 // Setup conf for a selection of an email template of type thirdparty
 // $formSetup->newItem('DASHCYCLES_MYPARAM6')->setAsEmailTemplate('thirdparty');

@@ -77,7 +77,7 @@ class modDashCycles extends DolibarrModules
 		$this->editor_squarred_logo = '';					// Must be image filename into the module/img directory followed with @modulename. Example: 'myimage.png@dashcycles'
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
-		$this->version = '0.6';
+		$this->version = '0.7';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
@@ -111,9 +111,7 @@ class modDashCycles extends DolibarrModules
 			// Set this to 1 if module has its own theme directory (theme)
 			'theme' => 0,
 			// Set this to relative path of css file if module has its own css file
-			'css' => array(
-				'/dashcycles/css/dashcycles.css',
-			),
+			'css' => 0,
 			// Set this to relative path of js file if module must load a js on all pages
 			'js' => array(
 				//   '/dashcycles/js/dashcycles.js.php',
@@ -349,23 +347,57 @@ class modDashCycles extends DolibarrModules
 		/* END MODULEBUILDER TOPMENU */
 
 		/* BEGIN MODULEBUILDER LEFTMENU MYOBJECT */
-		
-		$this->menu[$r++]=array(
-			'fk_menu'=>'fk_mainmenu=commercial',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type'=>'left',                          // This is a Left menu entry
-			'titre'=>$langs->trans('SALES_CYCLES'),
-			'prefix' => img_picto('', $this->picto, 'class="pictofixedwidth valignmiddle paddingright"'),
-			'mainmenu'=>'dashcycles',
-			'leftmenu'=>'myobject',
-			'url'=>'/dashcycles/dashcyclesindex.php',
-			'langs'=>'dashcycles@dashcycles',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-			'position'=>1000+$r,
-			'enabled'=>'isModEnabled("dashcycles")', // Define condition to show or hide menu entry. Use 'isModEnabled("dashcycles")' if entry must be visible if module is enabled.
-			'perms'=>1,
-			'target'=>'',
-			'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
-			'object'=>'MyObject'
-		);
+		if (getDolGlobalString("DASHCYCLES_DISPLAY") == "single"){
+			$this->menu[$r++]=array(
+				'fk_menu'=>'fk_mainmenu=commercial',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
+				'type'=>'left',                          // This is a Left menu entry
+				'titre'=>$langs->trans('SALES_CYCLES'),
+				'prefix' => img_picto('', $this->picto, 'class="pictofixedwidth valignmiddle paddingright"'),
+				'mainmenu'=>'dashcycles',
+				'leftmenu'=>'myobject',
+				'url'=>'/dashcycles/dashcyclesindex.php',
+				'langs'=>'dashcycles@dashcycles',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+				'position'=>1000+$r,
+				'enabled'=>'isModEnabled("dashcycles")', // Define condition to show or hide menu entry. Use 'isModEnabled("dashcycles")' if entry must be visible if module is enabled.
+				'perms'=>1,
+				'target'=>'',
+				'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
+				'object'=>'MyObject'
+			);
+		} else if (getDolGlobalString("DASHCYCLES_DISPLAY") == "double") {
+			$this->menu[$r++]=array(
+				'fk_menu'=>'fk_mainmenu=commercial',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
+				'type'=>'left',                          // This is a Left menu entry
+				'titre'=>$langs->trans('SALES_CYCLES_FIRST'),
+				'prefix' => img_picto('', $this->picto, 'class="pictofixedwidth valignmiddle paddingright"'),
+				'mainmenu'=>'dashcycles',
+				'leftmenu'=>'myobject',
+				'url'=>'/dashcycles/dashcyclesfirst.php',
+				'langs'=>'dashcycles@dashcycles',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+				'position'=>1000+$r,
+				'enabled'=>'isModEnabled("dashcycles")', // Define condition to show or hide menu entry. Use 'isModEnabled("dashcycles")' if entry must be visible if module is enabled.
+				'perms'=>1,
+				'target'=>'',
+				'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
+				'object'=>'MyObject'
+			);
+			$this->menu[$r++]=array(
+				'fk_menu'=>'fk_mainmenu=commercial',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
+				'type'=>'left',                          // This is a Left menu entry
+				'titre'=>$langs->trans('SALES_CYCLES_SECOND'),
+				'prefix' => img_picto('', $this->picto, 'class="pictofixedwidth valignmiddle paddingright"'),
+				'mainmenu'=>'dashcycles',
+				'leftmenu'=>'myobject',
+				'url'=>'/dashcycles/dashcyclessecond.php',
+				'langs'=>'dashcycles@dashcycles',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+				'position'=>1000+$r,
+				'enabled'=>'isModEnabled("dashcycles")', // Define condition to show or hide menu entry. Use 'isModEnabled("dashcycles")' if entry must be visible if module is enabled.
+				'perms'=>1,
+				'target'=>'',
+				'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
+				'object'=>'MyObject'
+			);
+		}
 		/*
 		$this->menu[$r++]=array(
 			'fk_menu'=>'fk_mainmenu=commercial',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
@@ -622,7 +654,7 @@ class modDashCycles extends DolibarrModules
 	
 		$ii = 0;
 		foreach ($boxactivated as $key => $box) {
-			if ((!empty($user->conf->$confuserzone) && $box->fk_user == 0) || (empty($user->conf->$confuserzone) && $box->fk_user != 0)) {
+			if ((!empty($user->conf->confuserzone) && $box->fk_user == 0) || (empty($user->conf->confuserzone) && $box->fk_user != 0)) {
 			continue;
 			}
 			if (empty($box->box_order) && $ii < ($nbboxactivated / 2)) {
@@ -773,10 +805,11 @@ class modDashCycles extends DolibarrModules
 			$resql = $db->query($sql);
 			// print 'sql :'.$sql.' res : '.$resql;
 			$res = $db->fetch_object($resql);
-			$obj->rowid = $res->rowid;
-			$obj->box_id = $res->box_id;
-			$obj->note = $res->note;
-
+			if($res){
+				$obj->rowid = $res->rowid;
+				$obj->box_id = $res->box_id;
+				$obj->note = $res->note;
+			}
 			// var_dump($obj);
 			// print '<br>';
 
@@ -784,7 +817,7 @@ class modDashCycles extends DolibarrModules
 			if(class_exists($obj->boxname)){
 				$box = new $obj->boxname($db, $obj->note);
 
-				$box->rowid = $obj->rowid;
+				$box->id = $obj->rowid;
 				$box->id = $obj->box_id;
 				$box->position =  $obj->position;
 				$box->box_order = $obj->box_order;

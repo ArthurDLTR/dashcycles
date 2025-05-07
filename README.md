@@ -2,7 +2,7 @@
 
 ## Features
 
-Description of the module...
+Module to display sales cycles with widget in a dedicated page
 
 <!--
 ![Screenshot dashcycles](img/screenshot_dashcycles.png?raw=true "DashCycles"){imgmd}
