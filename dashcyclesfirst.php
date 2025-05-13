@@ -101,7 +101,7 @@ if (isset($user->socid) && $user->socid > 0) {
 $form = new Form($db);
 $formfile = new FormFile($db);
 $sec = getDolGlobalInt('DASHCYCLES_RELOAD_FREQUENCY'); // Recover the value of refresh frequency
-llxHeader("", $langs->trans("DashCyclesArea"), '', '', 0, 0, '', '', '', 'mod-dashcycles page-index');
+llxHeader("", $langs->trans("SALES_CYCLES_FIRST"), '', '', 0, 0, '', '', '', 'mod-dashcycles page-index');
 print '<meta http-equiv="refresh" content="'.$sec.';URL='.$_SERVER['PHP_SELF'].'">'; // html tag to force the reload of the page based on $sec
 print '<style>#id-left{display: none}</style>';
 

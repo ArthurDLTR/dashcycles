@@ -46,6 +46,8 @@ DashCyclesAboutPage = A propos
 # Sample page
 #
 DashCyclesArea = Page de cycles de vente
+DashCyclesFirst = Page de cycles de vente
+DashCyclesSecond = Page de cycles d'achat
 MyPageName = My page name
 
 #
@@ -54,10 +56,11 @@ MyPageName = My page name
 MyWidget = My widget
 MyWidgetDescription = My widget description
 BoxLastWaitingProposals = Dernières propales en attente de signature
+BoxTitleOldestUnpaidCustomerBills = Les plus anciennes factures clients impayées
 
 SALES_CYCLES = Cycles de vente et d'achat
-SALES_CYCLES_FIRST = Cycles d'achat
-SALES_CYCLES_SECOND = Cycles de vente
+SALES_CYCLES_FIRST = Cycles de vente
+SALES_CYCLES_SECOND = Cycles d'achat
 
 #
 # Settings page
@@ -83,8 +86,20 @@ DASHCYCLES_WIDGET_WAITING_BILLS = Afficher le widget pour les factures non payé
 DASHCYCLES_MAX_LINES = Nombre maximum de lignes affichées
 
 LASTWAITINGPROPALS_MAX_LINES = Nombre de lignes affichées pour les propales en attente
+LASTWAITINGPROPALS_ORDER = Position pour les propales en attente
 WAITINGSUPPLIERORDERS_MAX_LINES = Nombre de lignes affichées pour les commandes fournisseurs en attente d'approbation
+WAITINGSUPPLIERORDERS_ORDER = Position pour les commandes fournisseurs en attente d'approbation
 UNDELIVEREDORDERS_MAX_LINES = Nombre de lignes affichées pour les commandes non livrées
+UNDELIVEREDORDERS_ORDER = Position pour les commandes non livrées
 PROGRESSSHIPMENTS_MAX_LINES = Nombre de lignes affichés pour les commandes partiellement livrées
+PROGRESSSHIPMENTS_ORDER = Position pour les commandes partielles
 SUPPLIERORDERSAWAITINGRECEPTION_MAX_LINES = Nombre de lignes affichés pour les commandes fournisseurs non réceptionnées
+SUPPLIERORDERSAWAITINGRECEPTION_ORDER = Position pour les commandes fournisseurs en attente de réception
 OLDESTUNPAIDCUSTOMERBILLS_MAX_LINES = Nombre de lignes affichés pour les factures impayées
+OLDESTUNPAIDCUSTOMERBILLS_ORDER = Position pour les factures impayées
+
+DASH_FIRST_COL = Première colonne
+DASH_SECOND_COL = Seconde colonne
+DASH_FIRST_ROW = première ligne
+DASH_SECOND_ROW = deuxième ligne
+DASH_THIRD_ROW = troisième ligne

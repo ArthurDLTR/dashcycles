@@ -1,5 +1,8 @@
 # CHANGELOG DASHCYCLES FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
+## Version 0.8
+Paramétrage pour la position des widgets sur le tableau de bord
+
 ## Version 0.7
 Paramétrages pour affichage des cycles de vente sur une ou deux pages. 
 

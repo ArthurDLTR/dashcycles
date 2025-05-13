@@ -735,71 +735,75 @@ class modDashCycles extends DolibarrModules
 				"box_order" => "B02",
 				"file" => "/dashcycles/core/boxes/box_supplierordersreception.php",
 				"boxname" => "box_supplier_orders_awaiting_reception"
-			)
-		*/
-
+				)
+				*/
+		
 		// Add the boxes if set as Yes in settings of the module
-		if(getDolGlobalInt('DASHCYCLES_WIDGET_ORDER_UNDELIVERED')){
-			array_push($objs, (object) array(
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_PROPALS')){
+			array_push($objs, array(
 				"position" => "0",
 				"box_id" => "-1",
-				"box_order" => "A01",
+				"box_order" => getDolGlobalString('LASTWAITINGPROPALS_ORDER'),
+				"file" => "/dashcycles/core/boxes/box_waitingpropal.php",
+				"boxname" => "box_waitingpropal"
+			));
+		}
+
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_ORDER_UNDELIVERED')){
+			array_push($objs, array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => getDolGlobalString('UNDELIVEREDORDERS_ORDER'),
 				"file" => "/dashcycles/core/boxes/box_undeliveredorders.php",
 				"boxname" => "box_undeliveredorders"
 			));
 		}
 
 		if(getDolGlobalInt('DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT')){
-			array_push($objs, (object) array(
+			array_push($objs, array(
 				"position" => "0",
 				"box_id" => "-1",
-				"box_order" => "A02",
+				"box_order" => getDolGlobalString('PROGRESSSHIPMENTS_ORDER'),
 				"file" => "/dashcycles/core/boxes/box_progressshipment.php",
 				"boxname" => "box_progressshipment"
 			));
 		}
 		
-		if(getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_APPROB')){
-			array_push($objs, (object) array(
-				"position" => "0",
-				"box_id" => "-1",
-				"box_order" => "B02",
-				"file" => "/dashcycles/core/boxes/box_waitingapprob.php",
-				"boxname" => "box_waitingapprob"
-			));
-		}
-
-		if(getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_PROPALS')){
-			array_push($objs, (object) array(
-				"position" => "0",
-				"box_id" => "-1",
-				"box_order" => "B01",
-				"file" => "/dashcycles/core/boxes/box_waitingpropal.php",
-				"boxname" => "box_waitingpropal"
-			));
-		}
-
-		if(getDolGlobalInt('DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER')){
-			array_push($objs, (object) array(
-				"position" => "0",
-				"box_id" => "-1",
-				"box_order" => "A03",
-				"file" => "/dashcycles/core/boxes/box_supplierordersreception.php",
-				"boxname" => "box_supplier_orders_awaiting_reception"
-			));
-		}
 
 		if(getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_BILLS')){
-			array_push($objs, (object) array(
+			array_push($objs, array(
 				"position" => "0",
 				"box_id" => "-1",
-				"box_order" => "B03",
+				"box_order" => getDolGlobalString('OLDESTUNPAIDCUSTOMERBILLS_ORDER'),
 				"file" => "/core/boxes/box_factures_imp.php",
 				"boxname" => "box_factures_imp"
 			));
 		}
 
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_APPROB')){
+			array_push($objs, array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => getDolGlobalString("WAITINGSUPPLIERORDERS_ORDER"),
+				"file" => "/dashcycles/core/boxes/box_waitingapprob.php",
+				"boxname" => "box_waitingapprob"
+			));
+		}
+
+		if(getDolGlobalInt('DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER')){
+			array_push($objs, array(
+				"position" => "0",
+				"box_id" => "-1",
+				"box_order" => getDolGlobalString("SUPPLIERORDERSAWAITINGRECEPTION_ORDER"),
+				"file" => "/dashcycles/core/boxes/box_supplierordersreception.php",
+				"boxname" => "box_supplier_orders_awaiting_reception"
+			));
+		}
+
+		usort($objs, function ($a, $b) { return $a['box_order'] > $b['box_order']; });
+
 		foreach ($objs as $key => $obj){
+			$obj = (object) $obj;
 			// Starting by getting the box_id based on the file name
 			$sql = "SELECT b.rowid as rowid, bd.rowid as box_id, bd.note as note FROM ".MAIN_DB_PREFIX."boxes_def AS bd LEFT JOIN ".MAIN_DB_PREFIX.'boxes AS b ON bd.rowid = b.box_id WHERE bd.file = "'.$obj->file.'"';
 			$resql = $db->query($sql);

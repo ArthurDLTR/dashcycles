@@ -134,15 +134,32 @@ $formSetup->newItem('DASHCYCLES_DISPLAY')->setAsSelect($displayChoices);
 // $item->setAsThirdpartyType();
 
 /**
- * Settings for the widgets
+ * Settings for the widgets with the same structure for each
+ * 
+ * Activate the widget with a button
+ * Maximum number of lines to display for the widget with a number
+ * The order of display with a select
  */
+// Title
 $formSetup->newItem("DASHCYCLES_WIDGETS_SETTINGS")->setAsTitle();
+
+// Choices for the order of display for the widgets
+$choices = array(
+	'A01' => $langs->trans("DASH_FIRST_COL")." ".$langs->trans("DASH_FIRST_ROW"),
+	'A02' => $langs->trans("DASH_FIRST_COL")." ".$langs->trans("DASH_SECOND_ROW"),
+	'A03' => $langs->trans("DASH_FIRST_COL")." ".$langs->trans("DASH_THIRD_ROW"),
+	'B01' => $langs->trans("DASH_SECOND_COL")." ".$langs->trans("DASH_FIRST_ROW"),
+	'B02' => $langs->trans("DASH_SECOND_COL")." ".$langs->trans("DASH_SECOND_ROW"),
+	'B03' => $langs->trans("DASH_SECOND_COL")." ".$langs->trans("DASH_THIRD_ROW")
+);
+
 $formSetup->newItem('DASHCYCLES_WIDGET_WAITING_PROPALS')->setAsYesNo();
 if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_PROPALS')){
 	$formSetup->newItem('LASTWAITINGPROPALS_MAX_LINES');
 	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
 	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 }
+$formSetup->newItem('LASTWAITINGPROPALS_ORDER')->setAsSelect($choices);
 
 $formSetup->newItem('DASHCYCLES_WIDGET_WAITING_APPROB')->setAsYesNo();
 if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_APPROB')){
@@ -150,6 +167,7 @@ if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_APPROB')){
 	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
 	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 }
+$formSetup->newItem('WAITINGSUPPLIERORDERS_ORDER')->setAsSelect($choices);
 
 $formSetup->newItem('DASHCYCLES_WIDGET_ORDER_UNDELIVERED')->setAsYesNo();
 if (getDolGlobalInt('DASHCYCLES_WIDGET_ORDER_UNDELIVERED')){
@@ -157,6 +175,7 @@ if (getDolGlobalInt('DASHCYCLES_WIDGET_ORDER_UNDELIVERED')){
 	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
 	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 }
+$formSetup->newItem('UNDELIVEREDORDERS_ORDER')->setAsSelect($choices);
 
 $formSetup->newItem('DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT')->setAsYesNo();
 if (getDolGlobalInt('DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT')){
@@ -164,6 +183,7 @@ if (getDolGlobalInt('DASHCYCLES_WIDGET_INPROGRESS_SHIPMENT')){
 	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
 	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 }
+$formSetup->newItem('PROGRESSSHIPMENTS_ORDER')->setAsSelect($choices);
 
 $formSetup->newItem('DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER')->setAsYesNo();
 if (getDolGlobalInt('DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER')){
@@ -171,6 +191,7 @@ if (getDolGlobalInt('DASHCYCLES_WIDGET_SHIPMENT_SUPPLIER')){
 	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
 	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 }
+$formSetup->newItem('SUPPLIERORDERSAWAITINGRECEPTION_ORDER')->setAsSelect($choices);
 
 $formSetup->newItem('DASHCYCLES_WIDGET_WAITING_BILLS')->setAsYesNo();
 if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_BILLS')){
@@ -178,6 +199,7 @@ if (getDolGlobalInt('DASHCYCLES_WIDGET_WAITING_BILLS')){
 	$item->defaultFieldValue = getDolGlobalInt('DASHCYCLES_MAX_LINES');
 	$item->fieldAttr['placeholder'] = $langs->trans('DASHCYCLES_MAX_LINES');
 }
+$formSetup->newItem('OLDESTUNPAIDCUSTOMERBILLS_ORDER')->setAsSelect($choices);
 
 /**
  * Suppliers orders settings
