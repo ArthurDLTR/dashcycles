@@ -56,6 +56,8 @@ MyWidgetDescription = My widget description
 BoxLastWaitingProposals = Last Waiting Propals
 
 SALES_CYCLES = Sales cycles
+SALES_CYCLES_FIRST = Sales cycles
+SALES_CYCLES_SECOND = Purchasing cycles
 
 #
 # Settings page
